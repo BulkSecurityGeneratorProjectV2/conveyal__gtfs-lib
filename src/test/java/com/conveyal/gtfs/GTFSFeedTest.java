@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -67,7 +68,7 @@ public class GTFSFeedTest {
     @Test
     public void canDoRoundtripLoadAndWriteToZipFile() throws IOException {
         // create a temp file for this test
-        File outZip = File.createTempFile("fake-agency-output", ".zip");
+        File outZip = Files.createTempFile("fake-agency-output", ".zip").toFile();
 
         // delete file to make sure we can assert that this program created the file
         outZip.delete();

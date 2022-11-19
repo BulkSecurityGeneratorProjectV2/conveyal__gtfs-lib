@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.util.zip.ZipFile;
 
 public class GTFSMain {
@@ -32,7 +33,7 @@ public class GTFSMain {
             System.out.println("Please specify a GTFS feed to load.");
             System.exit(1);
         }
-        File tempFile = File.createTempFile("gtfs", ".db");
+        File tempFile = Files.createTempFile("gtfs", ".db").toFile();
 
         GTFSFeed feed = new GTFSFeed(tempFile.getAbsolutePath());
         feed.loadFromFile(new ZipFile(arguments[0]));

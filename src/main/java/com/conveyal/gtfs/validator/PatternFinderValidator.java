@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -110,7 +111,7 @@ public class PatternFinderValidator extends TripValidator {
                 // NOTE: temp table name must NOT be prefixed with schema because temp tables are prefixed with their own
                 // connection-unique schema.
                 tempPatternForTripsTable = "pattern_for_trips";
-                tempPatternForTripsTextFile = File.createTempFile(tempPatternForTripsTable, "text");
+                tempPatternForTripsTextFile = Files.createTempFile(tempPatternForTripsTable, "text").toFile();
                 LOG.info("Loading via temporary text file at {}", tempPatternForTripsTextFile.getAbsolutePath());
                 // Create temp table for updating trips with pattern IDs to be dropped at the end of the transaction.
                 String createTempSql = String.format("create temp table %s(trip_id varchar, pattern_id varchar) on commit drop", tempPatternForTripsTable);

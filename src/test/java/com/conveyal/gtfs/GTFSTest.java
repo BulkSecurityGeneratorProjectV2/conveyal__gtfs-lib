@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -793,7 +794,7 @@ public class GTFSTest {
      * Helper function to export a GTFS from the database to a temporary zip file.
      */
     private File exportGtfs(String namespace, DataSource dataSource, boolean fromEditor) throws IOException {
-        File tempFile = File.createTempFile("snapshot", ".zip");
+        File tempFile = Files.createTempFile("snapshot", ".zip").toFile();
         GTFS.export(namespace, tempFile.getAbsolutePath(), dataSource, fromEditor);
         return tempFile;
     }

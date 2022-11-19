@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -118,7 +119,7 @@ public class TestUtils {
      */
     public static String zipFolderFiles(String folderName, boolean isRelativeToResourcesPath) throws IOException {
         // create temporary zip file
-        File tempFile = File.createTempFile("temp-gtfs-zip-", ".zip");
+        File tempFile = Files.createTempFile("temp-gtfs-zip-", ".zip").toFile();
         tempFile.deleteOnExit();
         String tempFilePath = tempFile.getAbsolutePath();
         // If folder name is relative to resources path, get full path. Otherwise, it is assumed to be an absolute path.

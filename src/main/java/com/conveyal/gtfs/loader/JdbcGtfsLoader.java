@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
 import java.io.*;
+import java.nio.file.Files;
 import java.sql.*;
 import java.util.*;
 import java.util.zip.ZipEntry;
@@ -357,7 +358,7 @@ public class JdbcGtfsLoader {
         // TODO are we loading with or without a header row in our Postgres text file?
         if (postgresText) {
             // No need to output headers to temp text file, our SQL table column order exactly matches our text file.
-            tempTextFile = File.createTempFile(targetTable.name, "text");
+            tempTextFile = Files.createTempFile(targetTable.name, "text").toFile();
             tempTextFileStream = new PrintStream(new BufferedOutputStream(new FileOutputStream(tempTextFile)));
             LOG.info("Loading via temporary text file at " + tempTextFile.getAbsolutePath());
         } else {
